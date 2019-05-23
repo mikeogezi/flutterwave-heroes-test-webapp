@@ -1,0 +1,12 @@
+html
+  include head
+  body
+    include fab
+    .container
+      #question_section(style='display: none;')
+        include question
+      #report_section(style='display: none;')
+        include report
+      #correction_section(style='display: none;')
+        include correction
+      include ack

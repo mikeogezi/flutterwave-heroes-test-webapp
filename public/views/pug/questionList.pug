@@ -1,0 +1,48 @@
+html
+  include head
+  body
+    .container
+      .row
+        h4 #{courseCode} Question List
+        .s12
+          if questions.length == 0
+            .card
+                .card-action
+                    h5.center No Questions Yet
+                    br
+                    br
+                    .row.center
+                      a.center-align.btn.waves-effect.waves-dark.blue(href='/' + courseCodeSlug + '/questions/add', style='margin-left: 0px;') Add Question
+                        i.material-icons.left playlist_add
+          else
+            .card
+                .card-action
+                    br
+                    .row.center
+                      a.center-align.btn.waves-effect.waves-dark.blue(href='/' + courseCodeSlug + '/questions/add', style='margin-left: 0px;') Add Question
+                        i.material-icons.left playlist_add
+
+          each question in questions
+            .card(id=question._id)
+                .card-action
+                    if question.passage
+                      ul.collapsible(style='margin: -16px -24px 0px -24px; box-shadow: none')
+                        li
+                          p.collapsible-header(style='margin: 2px 2px;')
+                            i.material-icons.right arrow_downward
+                            b(style='margin-left: 8px;') Passage
+                          p.collapsible-body(style='padding-top: 4px; padding-bottom: 16px; margin-left: -4px') #{question.passage}
+                    p: b Question
+                    p #{question.question}
+                    .row
+                    p: b Options
+                    each option in question.options
+                        p #{option}
+                    .row
+                    p: b Correct Option
+                    p #{question.correctOption}
+                    .s12
+                        button.delete-question-button.btn-large.waves-effect.waves-dark.red(courseCode=courseCodeSlug, _id=question._id || '') Delete Question
+                            i.material-icons.left delete
+                
+      include ack

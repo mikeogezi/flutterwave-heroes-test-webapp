@@ -1,0 +1,17 @@
+head
+    title #{title}
+    link(rel='stylesheet', href='/css/materialize.css')
+    link(rel='stylesheet', href='/css/style.css')
+    meta(charset='UTF-8', name='viewport', content='width=device-width, initial-scale=1')
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/materialize.min.js')
+    if needRave
+        //- script(src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js")
+        script(src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js")
+        script.
+            const API_publicKey = 'FLWPUBK_TEST-5b7d692ad1ab32330dd98067d1b5c3da-X' // 'FLWPUBK-b94ca8d86d29e972a65b2cb741458550-X'
+    if needChart
+        script(type='text/javascript', src='/js/chart.min.js')
+        link(rel='stylesheet', href='/css/chart.min.css')
+        
+    script(type='text/javascript', src='/js/app.js')

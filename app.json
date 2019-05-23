@@ -1,0 +1,7 @@
+{
+    "name": "Flutterwave Tech Heroes 2019 Test",
+    "description": "Flutterwave Tech Heroes 2019 Test",
+    "repository": "https://github.com/okibeogezi/flutterwave-heroes-test-webapp",
+    "keywords": ["Flutterwave", "Nodejs", "Payments"],
+    "image": "heroku/nodejs"
+}

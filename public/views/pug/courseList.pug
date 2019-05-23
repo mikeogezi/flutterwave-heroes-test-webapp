@@ -1,0 +1,21 @@
+html
+  include head
+  body
+    .container
+      .row
+        h4 Course List
+        .s12
+          each course in courses
+            .card
+                .card-action
+                    h5 #{course.courseCode}
+                    p #{course.name}
+                    .s12
+                        a.btn.waves-effect.waves-dark.blue(href='/' + course.courseCodeSlug + '/questions') View Questions
+                            i.material-icons.left view_list
+                        a.download-questions-button.btn.waves-effect.waves-dark.blue(courseCode=course.courseCodeSlug, style='margin-left: 4px;') Download Questions
+                            i.material-icons.left file_download
+                        a.btn.waves-effect.waves-dark.blue(href='/' + course.courseCodeSlug + '/questions/add', style='margin-left: 4px;') Add Question
+                            i.material-icons.left playlist_add
+                
+      include ack

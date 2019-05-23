@@ -1,0 +1,69 @@
+html
+  include head
+  body
+    .container
+      .row
+        h4 Ride Sharing Payment
+        #success-modal.modal
+            .modal-content
+                h4 Successfully Validated BVN
+                p Your BVN was successfully validated. Congratulations.
+            .modal-footer
+                a#success-continue(href="#" class="modal-action modal-close waves-effect waves-green btn-flat") Continue
+
+        #failure-modal.modal
+            .modal-content
+                h4 Ride Sharing Payment Failed
+                p The payment wasn't successful. Please try again.
+            .modal-footer
+                a#failure-try-again(href="#" class="modal-action modal-close waves-effect waves-green btn-flat") Try Again
+
+        - var fareStr = currency + ' ' + fare.toFixed(2)
+        - var tipStr = currency + ' ' + tip.toFixed(2)
+        - var totalStr = currency + ' ' + (fare + tip).toFixed(2)
+
+        script.
+            window.rideShareData = {
+                currency: '#{currency}',
+                fare: #{fare},
+                tip: #{tip},
+                total: #{fare + tip},
+                driverName: '#{driverName}',
+                pickupLocation: '#{pickup}',
+                destination: '#{destination}',
+            }
+
+        .s12
+            .card
+              .card-action
+                table
+                    tbody
+                        tr
+                            td: b Driver Name
+                            td #{driverName}
+                        tr
+                            td: b Pickup Location
+                            td #{pickup}
+                        tr
+                            td: b Destination
+                            td #{destination}
+                        tr
+                            td: hr
+                            td: hr
+                        tr
+                            td: b Fare
+                            td #{fareStr}
+                        tr
+                            td: b Tip
+                            td #{tipStr}
+                        tr
+                            td: b Total
+                            td: b: u #{totalStr}
+                
+                .row    
+                    
+                form#form                    
+                    button.btn-large.waves-effect.waves-dark.blue(type='button', onClick="onClickPay()") Pay <b>#{totalStr}</b> Now
+                        i.material-icons.left account_balance_wallet
+                
+      include ack

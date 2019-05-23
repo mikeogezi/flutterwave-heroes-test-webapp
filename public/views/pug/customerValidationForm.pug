@@ -1,0 +1,122 @@
+html
+  include head
+  body
+    .container
+      .row
+        h4 Customer Validation Form
+        #success-modal.modal.modal-fixed-footer
+            .modal-content
+                h4 Successfully Validated BVN
+                p Your BVN was successfully validated. Congratulations.
+                p: table.success-table
+                      thead
+                          tr
+                              td All Fields Validated
+                      tbody
+                          tr
+                              td: b BVN
+                              td.bvn #{companyCut}
+                              td.bvn-s
+                          tr
+                              td: b First Name
+                              td.fname #{fareStr}
+                              td.fname-s
+                          tr
+                              td: b Last Name
+                              td.lname #{driverCut}
+                              td.lname-s
+                          tr
+                              td: b Date Of Birth
+                              td.dob #{companyCut}
+                              td.dob-s
+                          tr
+                              td: b Phone
+                              td.phone #{companyCut}
+                              td.phone-s
+            .modal-footer
+                a#success-continue(href="#" class="modal-action modal-close waves-effect waves-green btn-flat") Continue
+
+        #error-modal.modal.modal-fixed-footer
+            .modal-content
+                h4 Error Validating BVN
+                p Your BVN couldn't be validated. Please try again.
+                p: table.error-table
+                      thead
+                          tr
+                              td Invalid Fields
+                      tbody
+                          tr
+                              td: b BVN
+                              td.bvn #{companyCut}
+                              td.bvn-s
+                          tr
+                              td: b First Name
+                              td.fname #{fareStr}
+                              td.fname-s
+                          tr
+                              td: b Last Name
+                              td.lname #{driverCut}
+                              td.lname-s
+                          tr
+                              td: b Date Of Birth
+                              td.dob #{companyCut}
+                              td.dob-s
+                          tr
+                              td: b Phone
+                              td.phone #{companyCut}
+                              td.phone-s
+
+            .modal-footer
+                a#error-try-again(href="#" class="modal-action modal-close waves-effect waves-green btn-flat") Try Again
+        .s12
+            .card
+              .card-action
+                form#form.s12
+                    .row
+                        .input-field.col.s6
+                                input#first-name(name='firstName', type='text', required)
+                                label(for='first-name') First Name (e.g. Robert)
+                        .input-field.col.s6
+                                input#last-name(name='lastName', type='text', required)
+                                label(for='last-name') Last Name (e.g. Axelrod)
+
+                    .row
+                        input-field.col.s12
+                            label(for='date-of-birth') Date of Birth
+                            input#date-of-birth.datepicker(name='dateOfBirth', type='text', required)
+
+                    .row
+                        .input-field.col.s12
+                            input#phone(name='phone', type='tel', required)
+                            label(for='phone') Phone (e.g. 09034099659)
+
+                    .row
+                        .input-field.col.s12
+                            input#bvn(name='bvn', type='text', required)
+                            label(for='bvn') BVN (e.g. 12345678901)
+
+                    
+                .s12
+                    button#validate-btn.btn-large.waves-effect.waves-dark.blue Validate BVN
+                        i.material-icons.left account_balance
+                    .right.submit-progress
+                        <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-blue-only">
+                                <div class="circle-clipper left">
+                                <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                .row
+                .s12
+                    button#valid-btn.btn.waves-effect.waves-dark.teal Fill Valid Details
+                        i.material-icons.left check_circle
+                    button#invalid-btn.btn.waves-effect.waves-dark.red Fill Invalid Details
+                        i.material-icons.left cancel
+
+                
+      include ack

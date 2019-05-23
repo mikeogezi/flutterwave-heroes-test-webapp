@@ -1,0 +1,77 @@
+html
+  include head
+  script.
+    var companyPct = 0.2
+    var driverPct = 1 - companyPct
+    var company = companyPct * #{fare}
+    var driver = driverPct * #{fare}
+    var data = {
+      labels: ['Company', 'Driver'],
+      datasets: [{
+            label: 'Company & Driver Fare Split',
+            backgroundColor: ['blue', 'indigo'],
+            borderColor: 'white',
+            data: [company, driver]
+      }]
+    }
+    $(document).ready(function () {
+        var ctx = $('#chart')
+        var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'pie',
+          // The data for our dataset
+          data: data,
+          // Configuration options go here
+          options: {
+              //- responsive: false
+              //- callbacks: {
+              //-       label: function(tooltipItems, data) { 
+              //-           return tooltipItems.yLabel + ' €';
+              //-       }
+              //- }
+          }
+      });
+    })
+  body
+    .container
+      .row
+        h4 Ride Sharing Payment Successfully Completed
+
+        - var companyPct = 0.2
+        - var driverPct = 1 - companyPct
+        - var companyCut = currency + ' ' + (companyPct * fare).toFixed(2)
+        - var driverCut = currency + ' ' + (driverPct * fare).toFixed(2)
+        - var fareStr = currency + ' ' + fare.toFixed(2)
+        - var tipStr = currency + ' ' + tip.toFixed(2)
+        - var totalStr = currency + ' ' + (fare + tip).toFixed(2)
+
+        .s12
+            .card
+              .card-action
+                p Ride Sharing Payment was successful and fare was split between the the Driver (80%) and Company (20%).
+                .row
+                  .col.m4.s6
+                    canvas#chart.center(width="300" height="300")
+                  .col.m8.s6
+                    table
+                      thead
+                          tr
+                              td Fare Split Breakdown
+                      tbody
+                          tr
+                              td: b Total Fare
+                              td #{fareStr}
+                          tr
+                              td: b Driver's Cut (80%)
+                              td #{driverCut}
+                          tr
+                              td: b Company's Cut (20%)
+                              td #{companyCut}
+                .s12
+                    a.btn.waves-effect.waves-dark.blue(href='/rideSharing') Try Demo Again
+                        i.material-icons.left account_balance_wallet
+                    a.btn.waves-effect.waves-dark.blue.blue.right(href='/customerValidation') See Customer BVN Validation Demo
+                        i.material-icons.left arrow_forward
+
+                
+      include ack

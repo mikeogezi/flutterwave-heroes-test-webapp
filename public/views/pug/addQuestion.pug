@@ -1,0 +1,37 @@
+html
+  include head
+  body
+    .container
+      .row
+        h4 Add Question To #{courseCode}
+        .s12
+            .card
+              .card-action
+                form.s12
+                    .row
+                        .input-field.col.s12
+                            textarea#passage.materialize-textarea(name='passage')
+                            label(for='passage') Passage (If Applicable)
+
+                    .row
+                        .input-field.col.s12
+                            input#question(name='question', type='text')
+                            label(for='question') Question
+
+                    .row
+                        - options = [1, 2, 3, 4, 5, 6]
+                        each optionNum in options
+                            - optionId = 'option-' + optionNum
+                            .input-field.col.s6
+                                input.option(id=optionId, name='option', type='text')
+                                label(for=optionId) Option #{optionNum}
+
+                    .row
+                        .input-field.col.s6
+                            input#correct-option(name='correct-option', type='text')
+                            label(for='correct-option') Correct Option
+                .s12
+                    button#add-question-button.btn-large.waves-effect.waves-dark.blue Submit Question
+                        i.material-icons.left playlist_add
+                
+      include ack
