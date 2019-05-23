@@ -10,7 +10,7 @@ let path = require('path')
 let request = require('request')
 
 let index = (req, res, next) => {
-    res.redirect('/customerValidationForm')
+    res.redirect('/customerValidation')
 }
 
 let getCustomerValidation = (req, res, next) => {
