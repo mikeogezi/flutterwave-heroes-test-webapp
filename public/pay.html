@@ -19,6 +19,9 @@
 
 			function onClickPay () {
 			    payWithRave()
+			    if (AndroidInterface) {
+				AndroidInterface.onBodyLoad()
+			    }
 			}
 
 			function getRideShareData () {
