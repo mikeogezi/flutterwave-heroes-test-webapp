@@ -58,6 +58,9 @@ app.get('/customerValidation/complete', routes.customerValidationDone)
 app.get('/rideSharing', routes.getRideSharing)
 // app.post('/rideSharing', routes.postRideSharing)
 app.get('/rideSharing/complete/:detailsJSON', routes.rideSharingDone)
+app.get('/pay', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '/public/pay.html'))
+})
 
 app.locals.pretty = true
 
