@@ -18,8 +18,8 @@
 			}
 
 			function onClickPay () {
-			    if (AndroidInterface) {
-				AndroidInterface.onBodyLoad()
+			    if (window.AndroidInterface) {
+				window.AndroidInterface.onBodyLoad()
 			    }
 			    payWithRave()
 			}
@@ -45,8 +45,8 @@
 				],
 				meta: [getRideShareData()],
 				onclose: function () {
-					if (AndroidInterface && !(window.success || window.failure)) {
-						AndroidInterface.onClosed()
+					if (window.AndroidInterface && !(window.success || window.failure)) {
+						window.AndroidInterface.onClosed()
 					}
 				},
 				callback: function (response) {
@@ -56,16 +56,16 @@
 					response.tx.chargeResponseCode == "0") {
 					// redirect to a success page
 					console.log('Going To:', '/rideSharing/complete/' + JSON.stringify(getRideShareData()))
-					if (AndroidInterface) {
+					if (window.AndroidInterface) {
 						window.success = true
-						AndroidInterface.onSuccess()
+						window.AndroidInterface.onSuccess()
 					}
 					// window.location.href = '/rideSharing/complete/' + JSON.stringify(getRideShareData())
 				    } else {
 					// redirect to a failure page.
-					if (AndroidInterface) {
+					if (window.AndroidInterface) {
 						window.failure = true
-						AndroidInterface.onFail()
+						window.AndroidInterface.onFail()
 					}
 					// $('#failure-modal').modal('open')
 				    }
