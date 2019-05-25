@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Pay NGN 1,000 Fare</title>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+		<script src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+    		<script>
+			const API_publicKey = 'FLWPUBK_TEST-5b7d692ad1ab32330dd98067d1b5c3da-X' // 'FLWPUBK-b94ca8d86d29e972a65b2cb741458550-X'
+		</script>
+		<script>
+			window.rideShareData = {
+				currency: 'NGN',
+				fare: 1000,
+				tip: 0,
+				total: 1000,
+				driverName: 'Michael Wagner',
+				pickupLocation: 'Festac',
+				destination: 'Ikoyi',
+			}
+
+			function onClickPay () {
+			    payWithRave()
+			}
+
+			function getRideShareData () {
+			    return window.rideShareData
+			}
+
+			function payWithRave() {
+			    var email = getRideShareData().driverName.toLowerCase().replace(' ', '') + '@gmail.com'
+			    var phone = '09034099655'
+			    var x = getpaidSetup({
+				PBFPubKey: API_publicKey,
+				amount: getRideShareData().total,
+				customer_email: email,
+				customer_phone: phone,
+				currency: getRideShareData().currency,
+				txref: "rave-123456",
+				subaccounts: [
+				    {
+					id: "RS_8C1A8FA1CFE706C26901C090D3D9C4BD"
+				    }
+				],
+				meta: [getRideShareData()],
+				onclose: function () {
+					if (AndroidInterface) {
+						AndroidInterface.onClosed()
+					}
+				},
+				callback: function (response) {
+				    var txref = response.tx.txRef;
+				    console.log("This is the response returned after a charge", response);
+				    if (response.tx.chargeResponseCode == "00" ||
+					response.tx.chargeResponseCode == "0") {
+					// redirect to a success page
+					console.log('Going To:', '/rideSharing/complete/' + JSON.stringify(getRideShareData()))
+					if (AndroidInterface) {
+						AndroidInterface.onSuccess()
+					}
+					// window.location.href = '/rideSharing/complete/' + JSON.stringify(getRideShareData())
+				    } else {
+					// redirect to a failure page.
+					if (AndroidInterface) {
+						AndroidInterface.onFail()
+					}
+					// $('#failure-modal').modal('open')
+				    }
+
+				    x.close(); // use this to close the modal immediately after payment.
+				}
+			    });
+			}
+		</script>
+	</head>
+
+	<body onload="onClickPay()">
+	</body>
+</html>

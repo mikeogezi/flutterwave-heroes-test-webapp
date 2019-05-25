@@ -107,6 +107,25 @@ let getRideSharing = (req, res, next) => {
     })
 }
 
+let getRideSharingJSON = (req, res, next) => {
+    const driverName = names[Math.floor(Math.random() * names.length)].NigerianName
+    const { pickup, destination } = pickTwoDifferent(places)
+    const fare = (Math.ceil(Math.random() * 10) * 100) + 700
+    const tip = 0
+    const currency = 'NGN'
+
+    res.json({
+        needRave: true,
+        title: 'Ride Sharing Payment',
+        driverName,
+        pickup,
+        destination,
+        currency,
+        tip,
+        fare
+    })
+}
+
 let postRideSharing = (req, res, next) => {}
 
 let rideSharingDone = (req, res, next) => {
