@@ -42,7 +42,7 @@
 				],
 				meta: [getRideShareData()],
 				onclose: function () {
-					if (AndroidInterface) {
+					if (AndroidInterface && !(window.success || window.failure)) {
 						AndroidInterface.onClosed()
 					}
 				},
@@ -54,12 +54,14 @@
 					// redirect to a success page
 					console.log('Going To:', '/rideSharing/complete/' + JSON.stringify(getRideShareData()))
 					if (AndroidInterface) {
+						window.success = true
 						AndroidInterface.onSuccess()
 					}
 					// window.location.href = '/rideSharing/complete/' + JSON.stringify(getRideShareData())
 				    } else {
 					// redirect to a failure page.
 					if (AndroidInterface) {
+						window.failure = true
 						AndroidInterface.onFail()
 					}
 					// $('#failure-modal').modal('open')
